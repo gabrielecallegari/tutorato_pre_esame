@@ -14,7 +14,7 @@ public class Elaborazione extends Thread{
     Gson gson=new Gson();
     Socket clientSocket=null;
     ServerSocket serverSocket=null;
-    static Elaborazione_Arraylist el;
+    static Elaborazione_Arraylist el; //N.B: la variabile deve essere per forza statica
 
     Elaborazione(){}
 
@@ -22,10 +22,9 @@ public class Elaborazione extends Thread{
         this.clientSocket=clientSocket;
         this.serverSocket=serverSocket;
     }
-    void createEl(){
+    void createEl(){ //inizializza variabile per l'elaborazione dell'array list e crea la lista
         el=new Elaborazione_Arraylist();
         el.crea_lista();
-        System.out.println(el.arr.get(1).costo);
     }
     @Override
     public void run(){
@@ -47,16 +46,34 @@ public class Elaborazione extends Thread{
         try {
             while ((messaggio = input.readLine()) != null) { //legge input
                 //qui faremo l'elaborazione dei nostri dati
-                output.println(el.all());
-                
+                output.println(elaborazione_messaggio(messaggio.toLowerCase(Locale.ROOT)));
             }
         }catch(IOException e){
             System.out.println("Errore nella lettura\n"+e.toString());
         }
-
     }
 
-
+    String elaborazione_messaggio(String digitato){
+        String result="";
+        switch (digitato){
+            case "all":
+                result=el.all();
+                break;
+            case "sum":
+                result=el.sum();
+                break;
+            case "minor":
+                result=el.minorPrice();
+                break;
+            case "sort":
+                result=el.sort();
+                break;
+            default:
+                result="Comando errato!";
+                break;
+        }
+        return result;
+    }
 
 
 
