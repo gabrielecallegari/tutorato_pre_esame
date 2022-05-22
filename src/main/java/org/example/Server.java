@@ -16,7 +16,7 @@ public class Server {
             System.out.println("Errore creazione server \n"+e.toString());
         }
         Socket clientSocket=null;
-
+        System.out.println("Server on");
         while(true){
             try {
                 clientSocket=serverSocket.accept();
@@ -28,6 +28,7 @@ public class Server {
             System.out.println("Connesso al client");
             Elaborazione thread=new Elaborazione(clientSocket,serverSocket);
             thread.start();
+
         }
 
         try {

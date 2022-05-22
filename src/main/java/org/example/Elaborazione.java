@@ -51,6 +51,7 @@ public class Elaborazione extends Thread{
         }catch(IOException e){
             System.out.println("Errore nella lettura\n"+e.toString());
         }
+        System.out.println("Client disconnesso");
     }
 
     String elaborazione_messaggio(String digitato){
@@ -69,7 +70,7 @@ public class Elaborazione extends Thread{
                 result=el.sort();
                 break;
             default:
-                result="Comando errato!";
+                result="Comando errato! Comandi disponibili: minor, sum, all, sort";
                 break;
         }
         return result;
